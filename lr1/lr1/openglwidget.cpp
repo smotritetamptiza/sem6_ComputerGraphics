@@ -37,11 +37,8 @@ void OpenGLWidget::paintGL() {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(0,20,20,0,1,0);
-    GL_QUAD_STRIP;
 
-    GLenum mode = MODES[_mode];
-
-    glBegin(mode);
+    glBegin(MODES[_mode]);
     paintVertices();
     glEnd();
 }
