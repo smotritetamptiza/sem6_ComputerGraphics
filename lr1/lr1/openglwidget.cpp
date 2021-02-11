@@ -1,17 +1,7 @@
 #include "openglwidget.h"
 #include <QtOpenGL>
 
-const int OpenGLWidget::MODE_GL_LINES = 0;
-const int OpenGLWidget::MODE_GL_LINE_STRIP = 1;
-const int OpenGLWidget::MODE_GL_LINE_LOOP = 2;
-const int OpenGLWidget::MODE_GL_TRIANGLES = 3;
-const int OpenGLWidget::MODE_GL_TRIANGLE_STRIP = 4;
-const int OpenGLWidget::MODE_GL_TRIANGLE_FAN = 5;
-const int OpenGLWidget::MODE_GL_POLYGON = 6;
-const int OpenGLWidget::MODE_GL_QUADS = 7;
-const int OpenGLWidget::MODE_GL_QUAD_STRIP = 8;
-
-const QStringList OpenGLWidget::MODES = {
+const QStringList OpenGLWidget::MODES_NAMES = {
     "GL_LINES",
     "GL_LINE_STRIP",
     "GL_LINE_LOOP",
@@ -23,21 +13,22 @@ const QStringList OpenGLWidget::MODES = {
     "GL_QUAD_STRIP",
 };
 
+const GLenum OpenGLWidget::MODES[] = {
+    GL_LINES,
+    GL_LINE_STRIP,
+    GL_LINE_LOOP,
+    GL_TRIANGLES,
+    GL_TRIANGLE_STRIP,
+    GL_TRIANGLE_FAN,
+    GL_POLYGON,
+    GL_QUADS,
+    GL_QUAD_STRIP,
+};
+
 OpenGLWidget::OpenGLWidget(QWidget *parent):
     QOpenGLWidget(parent),
-    _mode(MODE_GL_LINES)
-{
-    _w = width();
-    _h = height();
-}
-
-void OpenGLWidget::initializeGL() {
-}
-
-void OpenGLWidget::resizeGL(int w, int h) {
-    _w = w;
-    _h = h;
-}
+    _mode(0)
+{}
 
 void OpenGLWidget::paintGL() {
     glClearColor(0, 0, 0, 1);
@@ -48,46 +39,7 @@ void OpenGLWidget::paintGL() {
     glOrtho(0,20,20,0,1,0);
     GL_QUAD_STRIP;
 
-    GLenum mode = GL_LINES;
-
-    switch (_mode) {
-    case MODE_GL_LINES: {
-        mode = GL_LINES;
-        break;
-    }
-    case MODE_GL_LINE_STRIP: {
-        mode = GL_LINE_STRIP;
-        break;
-    }
-    case MODE_GL_LINE_LOOP: {
-        mode = GL_LINE_LOOP;
-        break;
-    }
-    case MODE_GL_TRIANGLES: {
-        mode = GL_TRIANGLES;
-        break;
-    }
-    case MODE_GL_TRIANGLE_STRIP: {
-        mode = GL_TRIANGLE_STRIP;
-        break;
-    }
-    case MODE_GL_TRIANGLE_FAN: {
-        mode = GL_TRIANGLE_FAN;
-        break;
-    }
-    case MODE_GL_POLYGON: {
-        mode = GL_POLYGON;
-        break;
-    }
-    case MODE_GL_QUADS: {
-        mode = GL_QUADS;
-        break;
-    }
-    case MODE_GL_QUAD_STRIP: {
-        mode = GL_QUAD_STRIP;
-        break;
-    }
-    }
+    GLenum mode = MODES[_mode];
 
     glBegin(mode);
     paintVertices();

@@ -13,9 +13,6 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-public slots:
-    void onModeChanged(int);
-
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;

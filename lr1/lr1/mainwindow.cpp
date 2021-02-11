@@ -20,15 +20,11 @@ MainWindow::MainWindow(QWidget *parent)
     ui->verticalLayout->setAlignment(ui->modeComboBox, Qt::AlignmentFlag::AlignTop);
 
     // fill control block
-    ui->modeComboBox->insertItems(0, OpenGLWidget::MODES);
+    ui->modeComboBox->insertItems(0, OpenGLWidget::MODES_NAMES);
     QObject::connect(ui->modeComboBox, SIGNAL(currentIndexChanged(int)), openGLWidget, SLOT(onModeChanged(int)));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-}
-
-void MainWindow::onModeChanged(int mode) {
-
 }
