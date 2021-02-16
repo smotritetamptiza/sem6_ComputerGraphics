@@ -72,12 +72,12 @@ const GLenum OpenGLWidget::DFACTORS[] = {
 
 OpenGLWidget::OpenGLWidget(QWidget *parent):
     QOpenGLWidget(parent),
-    _alphaTestFunc(0),
+    _alphaTestFunc(ALPHA_TESTS[0]),
     _alphaTestRef(0),
     _scissorX(0),
     _scissorY(0),
-    _sfactor(0),
-    _dfactor(0)
+    _sfactor(SFACTORS[0]),
+    _dfactor(DFACTORS[0])
 {}
 
 void OpenGLWidget::initializeGL() {
