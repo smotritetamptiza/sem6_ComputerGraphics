@@ -12,12 +12,14 @@ SOURCES += \
     config.cpp \
     drawer.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    pointsiterator.cpp
 
 HEADERS += \
     config.h \
     drawer.h \
-    mainwindow.h
+    mainwindow.h \
+    pointsiterator.h
 
 FORMS += \
     mainwindow.ui

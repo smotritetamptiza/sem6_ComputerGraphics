@@ -2,6 +2,7 @@
 
 #include <QMouseEvent>
 #include <QObject>
+#include <vector>
 
 class Config : public QObject
 {
@@ -11,17 +12,11 @@ public:
 
     explicit Config();
 
-    QList<QPoint> points;
-    QList<QList<QPoint>> drawPoints;
-    int drawPointsCount = 50;
+    QVector<QVector2D> points;
     double pointSize = 5.0;
 
     bool isAdding = false;
     bool isRemoving = false;
-
-    QPoint* hoveredPoint = nullptr;
-
-    void recomputeDrawPoints();
 
     void onMouseMove(QMouseEvent* event);
     void onMousePress(QMouseEvent* event);
