@@ -1,5 +1,6 @@
 #pragma once
 
+#include "pointsiterator.h"
 #include <QMouseEvent>
 #include <QObject>
 #include <vector>
@@ -15,15 +16,20 @@ public:
     explicit Config();
 
     QVector<QVector2D> points;
-    QVector2D* hoveredPoint;
+    QVector2D hoveredPoint = QVector2D(INFINITY, INFINITY);
+    QVector2D* movingPoint = nullptr;
 
     bool isAdding = false;
     bool isRemoving = false;
 
-    void refreshHoveredPoint();
+    QVector2D* findPointUnder(const QVector2D& mouse);
+    QVector2D findNearestPoint(PointsIterator& iterator, const QVector2D& mouse);
+    void refreshHoveredPoint(QMouseEvent* event);
     void onMouseMove(QMouseEvent* event);
     void onMousePress(QMouseEvent* event);
     void onMouseRelease(QMouseEvent* event);
+
+    PointsIterator iteratorFor(int point);
 
 public slots:
     void addButtonClicked();
