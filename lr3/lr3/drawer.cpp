@@ -27,6 +27,7 @@ void Drawer::paintGL() {
 
     Config& config = *Config::instance;
 
+    glEnable(GL_BLEND);
     glEnable(GL_LINE_SMOOTH);
     glEnable(GL_PROGRAM_POINT_SIZE);
     glEnable(GL_POINT_SMOOTH);
@@ -59,7 +60,7 @@ void Drawer::paintGL() {
     glEnd();
 
     if (config.hoveredPoint.x() != INFINITE) {
-        glColor3f(0.89f, 0.05f, 0.08f);
+        glColor3f(0.89f, 0.05f, 0.8f);
         glBegin(GL_POINTS);
         glVertex2f(config.hoveredPoint.x(), config.hoveredPoint.y());
         glEnd();
