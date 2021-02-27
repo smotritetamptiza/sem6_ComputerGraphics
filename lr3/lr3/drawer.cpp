@@ -5,6 +5,7 @@
 Drawer::Drawer(QWidget *parent) : QOpenGLWidget(parent)
 {
     QObject::connect(Config::instance, SIGNAL(changed()), this, SLOT(configChanged()));
+    setMouseTracking(true);
 }
 
 void Drawer::initializeGL() {
@@ -29,4 +30,8 @@ void Drawer::mouseMoveEvent(QMouseEvent* event) {
 
 void Drawer::mousePressEvent(QMouseEvent* event) {
     Config::instance->onMousePress(event);
+}
+
+void Drawer::mouseReleaseEvent(QMouseEvent *event) {
+    Config::instance->onMouseRelease(event);
 }
